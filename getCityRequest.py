@@ -22,11 +22,9 @@ then filter out useless info from the dictionary, convert it back to json and re
 
 def transform_data(weather_data):
     '''Grab the name, country, temp in F, text which is the sunny, cloudy. Create new dict and add those 4 and return it.'''
-    # print(type(weather_data))
-    # print(weather_obj_dict)
     new_dict = {}
-    if weather_data:
 
+    if weather_data:
         city_name = weather_data['location']['name']
         country = weather_data['location']['country']
         temp_f = weather_data['current']['temp_f']
