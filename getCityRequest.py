@@ -1,7 +1,13 @@
 import requests
+import os
+from dotenv import load_dotenv
+
+
+# Load environment variables from the .env file
+load_dotenv()
 
 def hit_weather_service_api(city):
-    api_key = "840dc66490ec49f4a8b11409252702"
+    api_key = os.getenv("API_KEY")
     url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}"
     try: 
         res = requests.api.get(url)
