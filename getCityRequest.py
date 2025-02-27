@@ -12,7 +12,6 @@ def hit_weather_service_api(city):
     url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}"
     try: 
         res = requests.api.get(url)
-        print(res.json())
         return res.json()
     except requests.exceptions.RequestException as e:  # Catch any exceptions related to the request
         print(f"Error: {e}")
@@ -21,13 +20,24 @@ def hit_weather_service_api(city):
 '''Create a function that will take in the res.json() object and convert it to a dictionary, 
 then filter out useless info from the dictionary, convert it back to json and return that.'''
 
-def transform_data(weather_obj_dict):
+def transform_data(weather_data):
     '''Grab the name, country, temp in F, text which is the sunny, cloudy. Create new dict and add those 4 and return it.'''
-    # print(type(weather_obj_dict))
+    # print(type(weather_data))
     # print(weather_obj_dict)
+    new_dict = {}
+    if weather_data:
 
-    # write code here
-    pass
+        city_name = weather_data['location']['name']
+        country = weather_data['location']['country']
+        temp_f = weather_data['current']['temp_f']
+        description = weather_data['current']['condition']['text']
+
+        new_dict["city_name"] = city_name
+        new_dict["country"] = country
+        new_dict["temp_f"] = temp_f
+        new_dict["description"] = description
+
+    return new_dict
 
 
 
@@ -36,4 +46,4 @@ def transform_data(weather_obj_dict):
 if __name__ == '__main__':
     city = input("Please give me a city: ")
     json_weather_obj = hit_weather_service_api(city)
-    transform_data(json_weather_obj)
+    print(transform_data(json_weather_obj))
