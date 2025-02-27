@@ -11,7 +11,7 @@ def hit_weather_service_api(city):
     url = f"http://api.weatherapi.com/v1/current.json?key={api_key}&q={city}"
     try: 
         res = requests.api.get(url)
-        # print(res.json())
+        print(res.json())
         return res.json()
     except requests.exceptions.RequestException as e:  # Catch any exceptions related to the request
         print(f"Error: {e}")
